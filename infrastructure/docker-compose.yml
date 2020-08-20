@@ -10,9 +10,13 @@ services:
       - ../backend:/work/backend
 
   web:
+    # 設計図
     build: ./docker/nginx
+    # 部屋番号みたいなもの
     ports:
+      # 自分のpcの80に入れば、80コンテナに入れる
       - 80:80
+    
     volumes:
       - php-fpm-socket:/var/run/php-fpm
       - ../backend:/work/backend
