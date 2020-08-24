@@ -5,15 +5,37 @@ namespace App\Http\Controllers;
 use App\Folder;
 use App\Task; 
 use Illuminate\Http\Request;
-
+use App\Http\Requests\CreateTask;
 use function GuzzleHttp\Promise\task;
 
 class TaskController extends Controller
 {
+
+    public function create(int $id, CreateTask $request)
+    {
+        $current_folder = Folder::find($id);
+
+        $task = new Task();
+        $task->title = $request->title;
+        $task->due_date = $request->due_date;
+
+        $current_folder->tasks()->save($task);
+
+        return redirect()->route('tasks.index', [
+            'id' => $current_folder->id,
+        ]);
+    }
+
+    public function showCreateForm(int $id)
+    {
+        return view('tasks/create', [
+            'folder_id' => $id
+        ]);
+    }
+
     //urlの変数をコントローラーで受け取る方法は、ルーティングで定めた{}内の値と合致しなければならない
     public function index(int $id)
     {
-        // dd(123);
         // すべてのフォルダを選択
         $folders = Folder::all();
         //選ばれたフォルダを取得

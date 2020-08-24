@@ -44,10 +44,10 @@ class Task extends Model
     }
 
   //日付の表示形式を2019-01-01から2019/01/01に変更する
-  public function getFormattedDueDateAttribute ()
-    {
-      return Carbon::createFormFormat('Y-m-d', $this->attributes['due_date'])
-        ->format('Y/m/d');
+  // public function getFormattedDueDateAttribute ()
+  //   {
+  //     return Carbon::createFormFormat('Y-m-d', $this->attributes['due_date'])
+  //       ->format('Y/m/d');
       
-    }
+  //   }
 }
