@@ -10,6 +10,36 @@ use function GuzzleHttp\Promise\task;
 
 class TaskController extends Controller
 {
+    public function edit(int $id, int $task_id, EditTask $request)
+    {
+      //1
+      //リクエストされたidでタスクデータを取得
+      $task = Task::find($task_id);
+
+      //2
+      //タスク変更内容の保存
+      $task->title = $request->title;
+      $task->status = $request->status;
+      $task->due_date = $request->due_date;
+      $task->save();
+
+      //3
+      //リダイレクト
+      return redirect()->route('tasks.index', [
+        'id' => $task->folder_id,
+       ]);
+    }
+
+    //編集したいタスクデータを取得し、テンプレートに渡す
+    //しなければ編集したいデータは空で
+    public function showEditForm(int $id, int $task_id)
+    {
+        $task = Task::find($task_id);
+
+        return view('tasks/edit', [
+            'task' => $task,
+        ]);
+    }
 
     public function create(int $id, CreateTask $request)
     {

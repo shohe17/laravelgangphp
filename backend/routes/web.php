@@ -13,6 +13,11 @@ Route::post('/folders/create', 'FolderController@create');
 
 
 //タスク作成機能ルーティング
+//getで/folders/{id}/tasks/createにリクエストが来たら、TaskControllerファイルのshowCreateFormメソッドを実行する
 Route::get('/folders/{id}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
-
 Route::post('/folders/{id}/tasks/create', 'TaskController@create');
+
+//タスク編集機能ルーティング
+//getで/folders/{id}/tasks/{task_id}/editにリクエストが来たら、TaskControllerファイルのshowEditFormメソッドを実行する
+Route::get('/folders/{id}/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
+Route::post('/folders/{id}/tasks/{task_id}/edit', 'TaskController@edit');
