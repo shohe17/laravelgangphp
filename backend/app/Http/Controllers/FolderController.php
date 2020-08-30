@@ -24,7 +24,9 @@ class FolderController extends Controller
     //タイトルに入力値を代入する
     $folder->title = $request->title;
     //インスタンスの状態をdbに書き込む
+    
     $folder->save();
+    // dd(123);
 
     //リダイレクト？
     return redirect()->route('tasks.index', [

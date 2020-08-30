@@ -21,3 +21,12 @@ Route::post('/folders/{id}/tasks/create', 'TaskController@create');
 //getで/folders/{id}/tasks/{task_id}/editにリクエストが来たら、TaskControllerファイルのshowEditFormメソッドを実行する
 Route::get('/folders/{id}/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
 Route::post('/folders/{id}/tasks/{task_id}/edit', 'TaskController@edit');
+
+//ログイン後にトップページへ映るリダイレクト
+Route::get('/', 'HomeController@index')->name('home');
+
+//会員登録・ログイン・ログアウト・パスワード再設定の各機能で必要なルーティング設定をすべて定義
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
