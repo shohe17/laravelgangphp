@@ -48,11 +48,11 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     //make関数の第一因数===検証するデータ、第二===ルールの定義、第三===メッセージ、第四===日本語の項目定義
-     protected function validator(array $data)
+    protected function validator(array $data)
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
-            //uniqueはuserのdb内容を参照し、実際に入力されたデータか確かめる
+            //unique ルールは、実際にデータベースの内容を参照してすでに使用されている値かどうかを確かめるルール
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ], [], [

@@ -7,6 +7,7 @@ use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
 use function GuzzleHttp\Promise\task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -66,6 +67,8 @@ class TaskController extends Controller
     //urlの変数をコントローラーで受け取る方法は、ルーティングで定めた{}内の値と合致しなければならない
     public function index(int $id)
     {
+        // ★ ユーザーのフォルダを取得する
+        $folders = Auth::user()->folders()->get();
         // すべてのフォルダを選択
         $folders = Folder::all();
         //選ばれたフォルダを取得
