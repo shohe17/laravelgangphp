@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Folder; 
+use App\Policies\FolderPolicy; 
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -12,8 +14,9 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
+    //$policies プロパティでモデルクラスとポリシークラスを紐づけます。
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        Folder::class => FolderPolicy::class,
     ];
 
     /**

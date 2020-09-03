@@ -24,19 +24,20 @@ class FolderController extends Controller
   {
     // dd($request);
     //フォルダモデルのインスタンすを作成する
+    
     $folder = new Folder();
     //タイトルに入力値を代入する
     $folder->title = $request->title;
+    
     //ユーザーに紐づけて保存
     //Auth::user() でユーザーモデルが取得
     //インスタンスの状態をdbに書き込む
     Auth::user()->folders()->save($folder);
-
     // dd(123);
 
     //リダイレクト？
     return redirect()->route('tasks.index', [
-      'id' => $folder->id,
+      'folder' => $folder->id,
       
     ]);
   }
